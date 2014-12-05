@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Edit <%= post.name %></title>
+</head>
+<body>
+	<h1>Edit <%= post.name %></h1>
+	<form method="POST" action="/posts/<%= post.id %>?_method=PATCH">
+		<p><input type="text" name="name" placeholder="Title" value="<%= post.name %>"></p>
+		<p><textarea rows="4" cols="50" name="entry" placeholder="Entry Content"><%= post.entry %></textarea></p>
+		<input type="submit">
+	</form>
+	<p><a href="/posts/<%= post.id %>">Back</a></p>
+</body>
+</html>
