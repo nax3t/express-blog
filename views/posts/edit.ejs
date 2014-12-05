@@ -25,6 +25,7 @@
 					<h1>Edit <%= post.name %></h1>
 					<form method="POST" action="/posts/<%= post.id %>?_method=PATCH">
 						<p><input type="text" name="name" placeholder="Title" value="<%= post.name %>"></p>
+						<p><input type="text" name="avatar" placeholder="Avatar Url" value="<%= post.avatar %>"></p>
 						<p><textarea rows="4" cols="50" name="entry" placeholder="Entry Content"><%= post.entry %></textarea></p>
 						<input type="submit">
 					</form>

@@ -48,7 +48,7 @@ app.get('/posts/:id', function(req, res)
 });
 
 app.post('/posts', function(req, res) {
-	db.query("INSERT INTO posts (name, entry) VALUES ($1, $2)", [req.body.name, req.body.entry], function(err, dbRes) {
+	db.query("INSERT INTO posts (name, entry, avatar) VALUES ($1, $2, $3)", [req.body.name, req.body.entry, req.body.avatar], function(err, dbRes) {
 		if(!err) {
 			res.redirect('/posts');
 		}
@@ -64,7 +64,7 @@ app.get('/posts/:id/edit', function(req, res) {
 });
 
 app.patch('/posts/:id', function(req, res) {
-	db.query("UPDATE posts SET name = $1, entry = $2 WHERE id = $3", [req.body.name, req.body.entry, req.params.id], function(err, dbRes) {
+	db.query("UPDATE posts SET name = $1, entry = $2, avatar = $3, WHERE id = $4", [req.body.name, req.body.entry, req.body.avatar, req.params.id], function(err, dbRes) {
 		if (!err) {
 			res.redirect('/posts/' + req.params.id);
 		}

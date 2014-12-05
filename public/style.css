@@ -165,3 +165,20 @@ h6, .h6 {
 .blog-footer p:last-child {
   margin-bottom: 0;
 }
+
+/* Avatar */
+.avatar {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;                            
+	width: 75px;
+	height: 75px;
+	margin-right: 15px;;
+}
+
+/* Index Entries */
+.indexEntry {
+	margin-left: 92px;
+}

@@ -28,8 +28,8 @@
         <div class="col-sm-8 blog-main">
 				<% for (var i=0; i<posts.length; i++) { %>
           <div class="blog-post">
-            <h2 class="blog-post-title"><a href="/posts/<%= posts[i].id %>"><%= posts[i].name %></a></h2>
-            <p><%= posts[i].entry %></p>
+            <h2 class="blog-post-title"><a href="/posts/<%= posts[i].id %>"><img class="avatar" src="<%= posts[i].avatar %>"/><%= posts[i].name %></a></h2>
+            <p class="indexEntry"><%= posts[i].entry %></p>
           </div><!-- /.blog-post -->
 				<% } %>
         </div><!-- /.blog-main -->
