@@ -1,15 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Edit <%= post.name %></title>
+	<title>Edit <%= post.name %></title>
+	<link rel="stylesheet" type="text/css" href="/style.css">
+	<link href="//d2c5utp5fpfikz.cloudfront.net/3_1_1/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//d2c5utp5fpfikz.cloudfront.net/3_1_1/css/bootstrap.css.map" rel="stylesheet">
+	<link href="//d2c5utp5fpfikz.cloudfront.net/3_1_1/css/bootstrap-theme.min.css" rel="stylesheet">
+	<link href="//d2c5utp5fpfikz.cloudfront.net/3_1_1/css/bootstrap-theme.css.map" rel="stylesheet">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="//d2c5utp5fpfikz.cloudfront.net/3_1_1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<h1>Edit <%= post.name %></h1>
-	<form method="POST" action="/posts/<%= post.id %>?_method=PATCH">
-		<p><input type="text" name="name" placeholder="Title" value="<%= post.name %>"></p>
-		<p><textarea rows="4" cols="50" name="entry" placeholder="Entry Content"><%= post.entry %></textarea></p>
-		<input type="submit">
-	</form>
-	<p><a href="/posts/<%= post.id %>">Back</a></p>
+  <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item" href="/">Home</a>
+          <a class="blog-nav-item" href="/posts/new">New Post</a>
+        </nav>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 blog-main">
+					<h1>Edit <%= post.name %></h1>
+					<form method="POST" action="/posts/<%= post.id %>?_method=PATCH">
+						<p><input type="text" name="name" placeholder="Title" value="<%= post.name %>"></p>
+						<p><textarea rows="4" cols="50" name="entry" placeholder="Entry Content"><%= post.entry %></textarea></p>
+						<input type="submit">
+					</form>
+					<p><a href="/posts/<%= post.id %>">Back</a></p>
+				</div> <!-- blog-main -->
+			</div> <!-- row -->
+		</div> <!-- container -->
 </body>
 </html>

@@ -2,19 +2,65 @@
 <html>
 <head>
 	<title>All posts</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="/style.css">
+	<link href="//d2c5utp5fpfikz.cloudfront.net/3_1_1/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//d2c5utp5fpfikz.cloudfront.net/3_1_1/css/bootstrap.css.map" rel="stylesheet">
+	<link href="//d2c5utp5fpfikz.cloudfront.net/3_1_1/css/bootstrap-theme.min.css" rel="stylesheet">
+	<link href="//d2c5utp5fpfikz.cloudfront.net/3_1_1/css/bootstrap-theme.css.map" rel="stylesheet">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="//d2c5utp5fpfikz.cloudfront.net/3_1_1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<h1>All Public Blog Posts:</h1>
-	<ul>
-		<% for (var i=0; i<posts.length; i++) { %>
-			<li>
-				<a href="/posts/<%= posts[i].id %>">
-					<%= posts[i].name %>
-				</a>
-			</li>
-		<% } %>
-	</ul>
-	<a href="/posts/new">Add New Post</a>
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item active" href="/">Home</a>
+          <a class="blog-nav-item" href="/posts/new">New Post</a>
+        </nav>
+      </div>
+    </div>
+    <div class="container">
+      <div class="blog-header">
+        <h1 class="blog-title">My Express JS Blog</h1>
+        <p class="lead blog-description">An example blog made with Node, Express and Bootstrap.</p>
+      </div>
+      <div class="row">
+        <div class="col-sm-8 blog-main">
+				<% for (var i=0; i<posts.length; i++) { %>
+          <div class="blog-post">
+            <h2 class="blog-post-title"><a href="/posts/<%= posts[i].id %>"><%= posts[i].name %></a></h2>
+            <p><%= posts[i].entry %></p>
+          </div><!-- /.blog-post -->
+				<% } %>
+        </div><!-- /.blog-main -->
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>About</h4>
+            <p>This is a basic blog that I made with Node and the Express framework. It is styled with Twitter Bootstrap.</p>
+          </div>
+          <div class="sidebar-module">
+            <h4>Quick Links</h4>
+            <ol class="list-unstyled">
+            <% for (var i=0; i<posts.length; i++) { %>
+              <li><a href="/posts/<%= posts[i].id %>"><%= posts[i].name %></a></li>
+              <% } %>
+            </ol>
+          </div>
+          <div class="sidebar-module">
+            <h4>Social</h4>
+            <ol class="list-unstyled">
+              <li><a href="https://github.com/nax3t">GitHub</a></li>
+              <li><a href="https://twitter.com/@ianschoonover">Twitter</a></li>
+            </ol>
+          </div>
+        </div><!-- /.blog-sidebar -->
+      </div><!-- /.row -->
+    </div><!-- /.container -->
+    <footer class="blog-footer">
+      <p>2014 - Express Blog Example | Ian Schoonover</p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </footer>
 </body>
 </html>

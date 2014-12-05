@@ -12,6 +12,7 @@
     "body-parser": "^1.10.0",
     "ejs": "^1.0.0",
     "express": "^4.10.4",
+    "jquery": "^2.1.1",
     "method-override": "^2.3.0",
     "path": "^0.4.9",
     "pg": "^4.1.0"
