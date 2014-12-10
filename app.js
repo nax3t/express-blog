@@ -3,15 +3,75 @@ var express    = require('express');
 var app        = express();
 var ejs        = require('ejs');
 var db         = require('./db.js');
-var bodyParser = require('body-parser');
+var bodyParser = require('body-parser'),
+cookieParser  = require('cookie-parser'),
+session       = require('express-session');
 var methodOverride = require('method-override');
-var path       = require('path');
+var path       = require('path'),
+LocalStrategy	 = require('passport-local').Strategy,
+passport     	 = require('passport');
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(methodOverride('_method'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}));
+
+// Hard-coded users
+var users = [ 
+    { id: 1, username: 'cho', password: 'pineapple', email: 'cho@ga.com' }
+];
+
+function findByUsername(username, fn) {
+  for (var i = 0, len = users.length; i < len; i++) {
+    var user = users[i];
+    if (user.username === username) {
+      return fn(null, user);
+    }
+  }
+  return fn(null, null);
+}
+
+function findById(id, fn) {
+  var idx = id - 1;
+  if (users[idx]) {
+    fn(null, users[idx]);
+  } else {
+    fn(new Error('User ' + id + ' does not exist'));
+  }
+}
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  findById(id, function (err, user) {
+    done(err, user);
+  });
+});
+
+var localStrategy = new LocalStrategy(
+  function(username, password, done) {
+      findByUsername(username, function(err, user) {
+        if (err) { return done(err); }
+        if (!user) { return done(null, false, { message: 'Unknown user ' + username }); }
+        if (user.password != password) { return done(null, false, { message: 'Invalid password' }); }
+        return done(null, user);
+      })
+  }
+)
+
+passport.use(localStrategy);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Listen on port
 app.listen(3000);
@@ -21,9 +81,31 @@ console.log('Server running');
 app.get('/', function(req, res) {
 	db.query("SELECT * FROM posts;", function(err, dbRes) {
 		if(!err) {
-			res.render('posts/index', { posts: dbRes.rows });
+			var user = req.user;
+			res.render('posts/index', { posts: dbRes.rows, user: user });
 		}
 	});
+});
+
+app.get('/login', function(req, res) {
+	var user = req.user;
+	res.render('login', {user : user});
+});
+
+app.post('/login', passport.authenticate('local', 
+  {failureRedirect: '/login'}), function(req, res) {
+    res.redirect('/');
+});
+
+app.get('/profile', function(req, res) {
+	console.log(req.user)
+	var user = req.user
+	res.render('profile', {user: user});
+});
+
+app.get('/logout', function(req, res) {
+	req.logout();
+	res.redirect('/')
 });
 
 app.get('/posts', function(req, res) {
@@ -64,7 +146,7 @@ app.get('/posts/:id/edit', function(req, res) {
 });
 
 app.patch('/posts/:id', function(req, res) {
-	db.query("UPDATE posts SET name = $1, entry = $2, avatar = $3, WHERE id = $4", [req.body.name, req.body.entry, req.body.avatar, req.params.id], function(err, dbRes) {
+	db.query("UPDATE posts SET name = $1, entry = $2, avatar = $3 WHERE id = $4", [req.body.name, req.body.entry, req.body.avatar, req.params.id], function(err, dbRes) {
 		if (!err) {
 			res.redirect('/posts/' + req.params.id);
 		}

@@ -3,10 +3,9 @@
 <head>
 	<title>All posts</title>
 	<link rel="stylesheet" type="text/css" href="/style.css">
-	<link href="//d2c5utp5fpfikz.cloudfront.net/3_1_1/css/bootstrap.min.css" rel="stylesheet">
-	<link href="//d2c5utp5fpfikz.cloudfront.net/3_1_1/css/bootstrap.css.map" rel="stylesheet">
-	<link href="//d2c5utp5fpfikz.cloudfront.net/3_1_1/css/bootstrap-theme.min.css" rel="stylesheet">
-	<link href="//d2c5utp5fpfikz.cloudfront.net/3_1_1/css/bootstrap-theme.css.map" rel="stylesheet">
+	
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script src="//d2c5utp5fpfikz.cloudfront.net/3_1_1/js/bootstrap.min.js"></script>
 </head>
@@ -16,6 +15,12 @@
         <nav class="blog-nav">
           <a class="blog-nav-item active" href="/">Home</a>
           <a class="blog-nav-item" href="/posts/new">New Post</a>
+          <% if(user) { %>
+            <a href="./logout" class="blog-nav-item pull-right"><span class="glyphicon glyphicon-remove"></span> Logout</a>
+            <a href="./profile" class="blog-nav-item pull-right"><span class="glyphicon glyphicon-cog"></span> Profile</a>
+          <% } else { %>
+            <a href="./login" class="blog-nav-item pull-right"><span class="fa fa-user"></span> Login</a>
+          <% } %>
         </nav>
       </div>
     </div>

@@ -3,10 +3,8 @@
 <head>
 	<title>Edit <%= post.name %></title>
 	<link rel="stylesheet" type="text/css" href="/style.css">
-	<link href="//d2c5utp5fpfikz.cloudfront.net/3_1_1/css/bootstrap.min.css" rel="stylesheet">
-	<link href="//d2c5utp5fpfikz.cloudfront.net/3_1_1/css/bootstrap.css.map" rel="stylesheet">
-	<link href="//d2c5utp5fpfikz.cloudfront.net/3_1_1/css/bootstrap-theme.min.css" rel="stylesheet">
-	<link href="//d2c5utp5fpfikz.cloudfront.net/3_1_1/css/bootstrap-theme.css.map" rel="stylesheet">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script src="//d2c5utp5fpfikz.cloudfront.net/3_1_1/js/bootstrap.min.js"></script>
 </head>
@@ -27,7 +25,7 @@
 						<p><input type="text" name="name" placeholder="Title" value="<%= post.name %>"></p>
 						<p><input type="text" name="avatar" placeholder="Avatar Url" value="<%= post.avatar %>"></p>
 						<p><textarea rows="4" cols="50" name="entry" placeholder="Entry Content"><%= post.entry %></textarea></p>
-						<input type="submit">
+						<input class="btn-primary" type="submit">
 					</form>
 					<p><a href="/posts/<%= post.id %>">Back</a></p>
 				</div> <!-- blog-main -->
